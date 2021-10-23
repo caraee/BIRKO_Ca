@@ -707,20 +707,7 @@ ggboxplot(ToothGrowth, x = "dose", y = "len",
 
 write.csv(dat$`Genotype:Feature`,file = "./multcomps.csv")
 
-my_comparisons <- list( c("No Cre", "HET"), c("HET", "KO"))
-
-
-anno<-dat$`Genotype:Feature`[c("KO:GlucPeaks-HET:GlucPeaks",
-                         "No Cre:GlucPeaks-HET:BasePeaks"),"p adj"]
-
-# Make plot with custom x and y position of the bracket
-ggplot(iris, aes(x = Species, y = Sepal.Width, fill = Petal.Width > 1)) +
-  geom_boxplot(position = "dodge") +
-  geom_signif(
-    annotation = formatC(anno, digits = 1),
-    y_position = 4.05, xmin = 2.2, xmax = 3,
-    tip_length = c(0.2, 0.04)
-  )
+my_comparisons <- list( c("No Cre", "HET"), c("No Cre", "KO"))
 
 p<-ggplot(filter(features_long,Feature=="GlucPeaks"),
           aes(y=Value,x=Genotype,colour=Genotype,fill=Genotype))
